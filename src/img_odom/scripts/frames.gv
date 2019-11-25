@@ -1,0 +1,11 @@
+digraph G {
+"00000000004" -> "camera"[label="Broadcaster: /img_odom_broadcaster\nAverage rate: 4.252 Hz\nMost recent transform: 1570957851.244 ( 0.153 sec old)\nBuffer length: 4.704 sec\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 1570957851.397"[ shape=plaintext ] ;
+ }->"00000000003";
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 1570957851.397"[ shape=plaintext ] ;
+ }->"00000000004";
+}
