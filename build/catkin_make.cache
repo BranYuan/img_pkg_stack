@@ -1,2 +1,0 @@
-
--DCATKIN_DEVEL_PREFIX=/home/sweet/img_pkg_stack/devel -DCMAKE_INSTALL_PREFIX=/home/sweet/img_pkg_stack/install -G Unix Makefiles

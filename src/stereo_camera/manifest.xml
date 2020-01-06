@@ -1,0 +1,17 @@
+<package>
+  <description brief="img_odom">
+
+     img_odom
+
+  </description>
+  <author>sweet-9</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/img_odom</url>
+  <depend package="rospy"/>
+  <depend package="std_msgs"/>
+  <depend package="roscpp"/>
+
+</package>
+
+

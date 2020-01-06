@@ -61,6 +61,9 @@ class gyroscope:
         # 读取多个目标地址的值，并根据转换关系转化
         try:
             goal_value = self.slave.read_register(addr)
+            if goal_value > 0xffff/2:
+                goal_value -= 0xffff
+            #print goal_value
             goal_value *= transfer
             return goal_value
         except:
@@ -132,6 +135,8 @@ class gyroscope:
 
 if __name__ == "__main__":
     gyroscope = gyroscope()
+    while True:
+        print gyroscope.read_angle_yaw()
     print "accelerates"
     print gyroscope.read_accelerates()
     print gyroscope.read_accelerate_x()

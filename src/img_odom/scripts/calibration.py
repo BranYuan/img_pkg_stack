@@ -18,7 +18,7 @@ def calibrate(cap):
     criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001)
     Nx_cor = 9
     Ny_cor = 6
-    width = 0.0148      # 棋盘格边长，单位m
+    width = 21.875      # 棋盘格边长，单位m
 
     objp = np.zeros((Nx_cor * Ny_cor, 3), np.float32)
     objp[:, :2] = np.mgrid[0:Nx_cor, 0:Ny_cor].T.reshape(-1, 2)
@@ -28,7 +28,7 @@ def calibrate(cap):
     count = 0       # count 用来标志成功检测到的棋盘格画面数量
     while True:
         ret, frame = cap.read()     # 获取一帧图像
-        frame = cv2.resize(frame, None, fx=0.4, fy=0.4)  # 改变图像大小
+        frame = cv2.resize(frame, None, fx=0.5, fy=0.5)  # 改变图像大小
         if cv2.waitKey(1) & 0xFF == ord(' '):
             # 空格按下，获取一帧图像
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -58,6 +58,12 @@ def calibrate(cap):
         print 'total error: ', mean_error / len(objpoints)
         np.savez('calibrate.npz', mtx=mtx, dist=dist[0:4])
     '''
+    (array([[735.46080545,   0.        , 487.04677637],
+       [  0.        , 732.3286531 , 259.41027867],
+       [  0.        ,   0.        ,   1.        ]]), 
+       
+       array([[-4.54350100e-01,  2.83077330e-01, -2.74053940e-04,
+         7.77758472e-04, -1.10242838e-01]]))
     # mtx = [[,599.60234739 0, ]380.40832195
              [0, 599.22310639, 211.32155849]
              [0,0,1]]
@@ -76,7 +82,7 @@ def undistortion(img, mtx, dist):
 '''
 
 if __name__ == '__main__':
-    url = "rtsp://admin:@192.168.1.52/h265/main/av_stream"
+    url = "rtsp://admin:@192.168.52.52/h265/main/av_stream"
     # cap = cv2.VideoCapture(0)
     cap = cv2.VideoCapture(url)
     # calibrate(cap)
@@ -93,7 +99,7 @@ if __name__ == '__main__':
     while True:
         ret, frame = cap.read()
         frame = undistortion(frame, mtx, dist[0:4])
-        frame = cv2.resize(frame, None, fx=0.4, fy=0.4)  # 改变图像大小
+        frame = cv2.resize(frame, None, fx=0.5, fy=0.5)  # 改变图像大小
         cv2.imshow('frame', frame)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
